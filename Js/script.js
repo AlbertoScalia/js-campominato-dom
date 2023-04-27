@@ -1,3 +1,6 @@
+//assegno alla variabile gameOver il valore false che poi cambierà nel corso del gioco
+let gameOver = false;
+
 // Assegno una costante all'elemento container
 const squareContainer = document.querySelector('.container');
 
@@ -68,43 +71,55 @@ function generateGrid(maxSqaures) {
 }
 
 
-
-
-
-/*
-// Creo un addEventListener legato al click del bottone
-btnClick.addEventListener('click', function () {
-    //A ogni clicco del bottone evito di creare altre celle
-    squareContainer.innerHTML = '';
-    //Creo il ciclo che genererà la griglia con le cento celle 
-    let i = 1
-    while (i <= 100) {
-        const squareElement = document.createElement('div');
-        squareElement.classList.add('square');
-        squareElement.innerHTML = `${i}`;
-        squareContainer.append(squareElement);
-        i++;
-    }
-
-    //Assegno una variabile alla classe delle celle
+//Creo la funzione per cliccare sulle caselle
+function clickedSquare(array) {
+    //Assegno la costante alle caselle
     const squares = document.querySelectorAll('.square');
+    //Assegno un valore provvisorio al numero di click
+    let numbOfClick = 0;
+    //stabilisco il numero massimo delle volte in cui si può cliccare in una partita
+    const maxClick = maxSqaures - maxRandomNumber;
 
-    // Creo un ciclo per selezionare ciascuna cella
+    // Creo un ciclo per selezionare ciascuna casella
     for (let i = 0; i < squares.length; i++) {
-        const squareSelector = squares[i];
-        //Creo un addEventListener per colorare ogni cella selezionata
-        squareSelector.addEventListener('click', function () {
-            squareSelector.classList.add('square_click');
-            //Messaggio in console con il numero della cella cliccata.
-            console.log(`Hai selezionato la casella n. ${squareSelector.innerHTML}.`);
+        //Seleziono ogni singola casella e la assegno ad una variabile
+        const square = squares[i];
+        //Creo un addEventListener al click
+        square.addEventListener('click', function () {
+            //Se il numero della casella cliccata corrisponde a un numero dell'array questa si colora di rosso
+            if (numberGenerator.includes(Number(square.innerHTML))) {
+                square.classList.add('square_red');
+                alert('Hai perso!');
+                gameOver = true;
+            
+                return;
+            } else {
+                //Altrimenti si colora di verde
+                square.classList.add('square_click');
+                console.log(`Hai selezionato la casella n. ${square.innerHTML}.`);
+                numbOfClick++;
+                //se il numero dei click è uguale al maxClick si attiva il console.log di vittoria
+                if (numbOfClick === maxClick) {
+                    console.log(`Hai vinto! Hai cliccato ${numbOfClick} volte senza beccare una bomba!`);
+                    gameOver = true;
+                    return;
+                }
+            }
         })
     }
+}
 
+// Creo un addEventListener che attivi le funzioni precedenti
+btnClick.addEventListener('click', function () {
+    selectDifficulty();
+    createNumbArray(maxSqaures);
+    generateGrid(maxSqaures);
+    clickedSquare(numberGenerator);
+
+    if (gameOver) {
+        return;
+    }
 })
-*/
-
-
-
 
 
 
