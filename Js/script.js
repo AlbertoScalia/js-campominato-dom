@@ -34,6 +34,41 @@ function createNumbArray(maxSqaures) {
 }
 
 
+//Lavoro sulla creazione della griglia 
+
+let maxSqaures;
+
+function selectDifficulty() {
+    //Stabilisco la difficoltà in base al valore scelto nel select 
+    if (difficulty.value == 1) {
+        maxSqaures = 100;
+    } else if (difficulty.value == 2) {
+        maxSqaures = 81;
+    } else if (difficulty.value == 3) {
+        maxSqaures = 49;
+    }
+    //Resetto l'array quando viene cambiato il livello
+    numberGenerator = [];
+}
+
+//Creo la funzione che genera la griglia
+function generateGrid(maxSqaures) {
+    //A ogni clicco del bottone evito di creare altre caselle
+    squareContainer.innerHTML = '';
+    //Ciclo che genera il numero di caselle a seconda della difficoltà scelta
+    let i = 1;
+    while (i <= maxSqaures) {
+        const squareElement = document.createElement('div');
+        squareElement.style.width = `calc(100% / ${Math.sqrt(maxSqaures)}`;
+        squareElement.classList.add('square');
+        squareElement.innerHTML = `${Number(i)}`;
+        squareContainer.append(squareElement);
+        i++;
+    }
+}
+
+
+
 
 
 /*
