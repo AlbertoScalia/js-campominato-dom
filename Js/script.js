@@ -4,6 +4,39 @@ const squareContainer = document.querySelector('.container');
 //Assegno una costante all'elemento bottone
 const btnClick = document.getElementById('play');
 
+//Assegno una costante all'id "difficulty"
+const difficulty = document.getElementById('difficulty');
+
+// Creo la funzione per generare 16 numeri random
+function randomGenerator(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//Creo l'array vuoto
+let numberGenerator = [];
+
+//Assegno una costante al massimo dei numeri che devono essere generati
+const maxRandomNumber = 16;
+
+//Creo la funzione per generare l'array che conterrà i numeri
+function createNumbArray(maxSqaures) {
+    let i = 1;
+    while (i <= maxRandomNumber) {
+        let randomNumb = randomGenerator(1, maxSqaures); 
+        if (!numberGenerator.includes(randomNumb)) {
+            numberGenerator.push(randomNumb);
+        } else {
+            continue;
+        }
+        i++;
+    }
+    console.log(numberGenerator);
+}
+
+
+
+
+/*
 // Creo un addEventListener legato al click del bottone
 btnClick.addEventListener('click', function () {
     //A ogni clicco del bottone evito di creare altre celle
@@ -33,9 +66,7 @@ btnClick.addEventListener('click', function () {
     }
 
 })
-
-
-
+*/
 
 
 
